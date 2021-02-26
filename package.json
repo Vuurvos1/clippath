@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/Vuurvos1/clippath#readme",
   "dependencies": {
-    "@editorjs/editorjs": "^2.19.1",
     "compression": "^1.7.1",
     "dotenv": "^8.2.0",
+    "marked": "^2.0.0",
     "polka": "next",
     "postcss": "^8.2.6",
     "sirv": "^1.0.0"
