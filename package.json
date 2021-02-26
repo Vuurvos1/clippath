@@ -1,0 +1,34 @@
+{
+  "name": "clippath",
+  "version": "0.0.1",
+  "description": "A content focused headless cms",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx nodemon index.js",
+    "lint": "eslint --fix --ext .js .",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vuurvos1/clippath.git"
+  },
+  "author": "Sam de Kanter",
+  "contributors": [
+    "Rowin Ruizendaal"
+  ],
+  "license": "GNU v3",
+  "bugs": {
+    "url": "https://github.com/Vuurvos1/clippath/issues"
+  },
+  "homepage": "https://github.com/Vuurvos1/clippath#readme",
+  "dependencies": {
+    "@editorjs/editorjs": "^2.19.1",
+    "dotenv": "^8.2.0",
+    "polka": "^0.5.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-google": "^0.14.0",
+    "nodemon": "^2.0.7"
+  }
+}
