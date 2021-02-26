@@ -1,0 +1,15 @@
+{
+  "background_color": "#ffffff",
+  "theme_color": "#333333",
+  "name": "clipPath",
+  "short_name": "clipPath",
+  "display": "minimal-ui",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    }
+  ]
+}
