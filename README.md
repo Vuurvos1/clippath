@@ -2,19 +2,22 @@
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+## Setup
 
 ```bash
-# create a new project in the current directory
-npm init svelte@next
-
-# create a new project in my-app
-npm init svelte@next my-app
+# Install node modules
+pnpm install
 ```
 
-> Note: the `@next` is temporary
+Create a .env file in the root of the project containing
+
+```
+VITE_SUPABASE_URL=<your-supabase-url>
+VITE_SUPABASE_ANON_KEY=<your-supabase-public-key>
+
+SUPABASE_PRIVATE_KEY=<your-supabase-private-key>
+SUPABASE_JWT_SECRET=<your-supabase-jwt-secret>
+```
 
 ## Developing
 

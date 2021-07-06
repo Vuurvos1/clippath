@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Clippath</title>
 </svelte:head>
 
 <section>
