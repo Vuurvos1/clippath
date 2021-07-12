@@ -1,20 +1,28 @@
 <script>
 	import supabase from '$lib/db';
-	// import { session } from '$app/stores';
 
 	let password, email;
 
-	async function signUp() {
-		const { user, session: sesh, error } = await supabase.auth.signUp({
-			email,
-			password
+	async function signUp(e) {
+		const response = await fetch('/register', {
+			method: 'post',
+			body: new FormData(e.target)
 		});
-		if (error) {
-			console.error(error);
-		}
-		console.log(user, sesh, error);
 
-		// $session = sesh;
+		if (response.ok) {
+			window.location = '/dashboard';
+		} else {
+			console.error(await response.text());
+		}
+
+		// const { user, session: sesh, error } = await supabase.auth.signUp({
+		// 	email,
+		// 	password
+		// });
+		// if (error) {
+		// 	console.error(error);
+		// }
+		// console.log(user, sesh, error);
 	}
 </script>
 
@@ -22,9 +30,11 @@
 	<title>Register</title>
 </svelte:head>
 
+<h1>Sign up</h1>
+
 <form action="" on:submit|preventDefault={signUp}>
-	<input bind:value={email} type="email" />
-	<input bind:value={password} type="text" />
+	<input bind:value={email} name="email" type="email" />
+	<input bind:value={password} name="password" type="password" />
 
 	<button type="submit">Submit</button>
 </form>

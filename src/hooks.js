@@ -20,3 +20,8 @@ export const handle = async ({ request, resolve }) => {
 
 	return response;
 };
+
+/** @type {import('@sveltejs/kit').GetSession} */
+export function getSession(request) {
+	return cookie.parse(request.headers.cookie || '').session || null;
+}
