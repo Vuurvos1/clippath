@@ -19,6 +19,23 @@ SUPABASE_PRIVATE_KEY=<your-supabase-private-key>
 SUPABASE_JWT_SECRET=<your-supabase-jwt-secret>
 ```
 
+Supabase setup
+
+```sql
+create table public.profiles (
+  id uuid references auth.users not null,
+  first_name text,
+  last_name text,
+
+  primary key (id)
+);
+
+alter table public.profiles enable row level security;
+```
+
+<!-- auth.uid() = user_id -->
+<!-- Protect data based on user_id -->
+
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
