@@ -1,3 +1,5 @@
+import { browser } from '$app/env';
+import { session } from '$app/stores';
 import supabase from '$lib/db';
 
 export async function get() {
@@ -8,6 +10,10 @@ export async function get() {
 			status: error.status,
 			body: error.message
 		};
+	}
+
+	if (browser) {
+		session.set(null);
 	}
 
 	return {

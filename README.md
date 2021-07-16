@@ -22,6 +22,7 @@ SUPABASE_JWT_SECRET=<your-supabase-jwt-secret>
 Supabase setup
 
 ```sql
+-- users
 create table public.profiles (
   id uuid references auth.users not null,
   first_name text,
@@ -31,6 +32,20 @@ create table public.profiles (
 );
 
 alter table public.profiles enable row level security;
+
+-- posts
+create table public.posts (
+  title text,
+  post text,
+  metadata json,
+  user_id uuid not null
+);
+
+alter table public.posts enable row level security;
+
+create policy "user update own posts"
+  on posts
+  for all using (auth.uid() = user_id);
 ```
 
 <!-- auth.uid() = user_id -->

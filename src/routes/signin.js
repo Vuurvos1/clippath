@@ -6,6 +6,8 @@ export async function post(request) {
 
 	const { session, error } = await supabase.auth.signIn({ email, password });
 
+	console.log('sesh', session);
+
 	if (error) {
 		return {
 			status: error.status,

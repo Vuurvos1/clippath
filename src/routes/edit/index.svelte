@@ -12,7 +12,14 @@
 	}
 </script>
 
-<script></script>
+<script>
+	import { goto } from '$app/navigation';
+	import { session } from '$app/stores';
+
+	if (!$session) {
+		goto('/login');
+	}
+</script>
 
 Edit
 

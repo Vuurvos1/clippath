@@ -4,25 +4,25 @@
 	let email, password;
 
 	async function signIn(e) {
-		const response = await fetch('/signin', {
-			method: 'post',
-			body: new FormData(e.target)
-		});
-
-		if (response.ok) {
-			window.location = '/dashboard';
-		} else {
-			console.error(await response.text());
-		}
-
-		// const { user, session, error } = await supabase.auth.signIn({
-		// 	email,
-		// 	password
+		// const response = await fetch('/signin', {
+		// 	method: 'post',
+		// 	body: new FormData(e.target)
 		// });
 
-		// if (error) {
-		// 	console.error(error);
+		// if (response.ok) {
+		// 	window.location = '/dashboard';
+		// } else {
+		// 	console.error(await response.text());
 		// }
+
+		const { user, session, error } = await supabase.auth.signIn({
+			email,
+			password
+		});
+
+		if (error) {
+			console.error(error);
+		}
 	}
 </script>
 

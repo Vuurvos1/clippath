@@ -13,20 +13,36 @@
 </script>
 
 <script>
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import supabase from '$lib/db';
+	import { goto } from '$app/navigation';
+
+	if (!$session) {
+		goto('/login');
+	}
+
+	// console.log($session);
+	// if (!$session) {
+	// 	goto('/login');
+	// }
+
+	// export let session;
+	// console.log(session);
 
 	let title = $page.params.slug;
 	let post;
 
 	async function getPost() {
-		const post = await supabase.from('test').select('room');
-		console.log('post', post);
+		// convert to try catch
+		// const post = await supabase.from('test').select('room');
+		console.log('post', post, $session);
 	}
 
 	getPost();
 
 	async function savePost(e) {
+		// convert to try catch
+
 		// check if title has changed
 		// > update post
 
@@ -34,7 +50,24 @@
 
 		// if not
 
-		const newPost = await supabase.from('test').insert({ room: title, val: post });
+		// const user = await supabase.auth.user();
+
+		// console.log('user', user);
+
+		const data = {
+			user_id: $session.user.id,
+			title: title,
+			post: post,
+			metadata: {}
+		};
+
+		const { error } = await supabase.from('posts').upsert(data, {
+			returning: 'minimal' // Don't return the value after inserting
+		});
+
+		console.log('err', error);
+
+		// if (error) throw error;
 	}
 </script>
 
