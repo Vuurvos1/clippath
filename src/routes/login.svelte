@@ -1,6 +1,5 @@
 <script>
 	import TextInput from '$lib/UI/TextInput/index.svelte';
-	import supabase from '$lib/db';
 
 	let email, password;
 	let visible = false;
@@ -8,7 +7,7 @@
 	async function signIn(e) {
 		console.log(new FormData(e.target));
 
-		const response = await fetch('/signin', {
+		const response = await fetch('/auth/signin', {
 			method: 'post',
 			body: new FormData(e.target)
 		});
@@ -18,15 +17,6 @@
 		} else {
 			console.error(await response.text());
 		}
-
-		// const { user, session, error } = await supabase.auth.signIn({
-		// 	email,
-		// 	password
-		// });
-
-		// if (error) {
-		// 	console.error(error);
-		// }
 	}
 
 	function toggle() {

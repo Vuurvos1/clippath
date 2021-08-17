@@ -9,7 +9,7 @@
 </script>
 
 <script>
-	import { page } from '$app/stores';
+	// import { page } from '$app/stores';
 	export let session;
 </script>
 
@@ -57,7 +57,7 @@
 				<li><a href="/">home</a></li>
 				<li><a href="/login">login</a></li>
 				<li><a href="/signup">signup</a></li>
-				<li><a href="/dashboard">dashboard {session ? '👍' : '🔒'}</a></li>
+				<li><a href="/dashboard">dashboard</a></li>
 				<li><a href="/edit">edit</a></li>
 			</ul>
 		{/if}
