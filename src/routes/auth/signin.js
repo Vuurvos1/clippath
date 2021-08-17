@@ -4,11 +4,7 @@ export async function post(request) {
 	let email = request.body.get('email');
 	let password = request.body.get('password');
 
-	// console.log(request.body.get());
-
 	const { session, error } = await supabase.auth.signIn({ email, password });
-
-	// console.log('sesh', session);
 
 	if (error) {
 		return {

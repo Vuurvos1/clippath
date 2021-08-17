@@ -2,36 +2,53 @@
 	export async function load({ page, fetch, session, context }) {
 		// redirect to login if no session
 
-		console.log(session);
+		// console.log('dash sesh', session);
 		// session = null;
 
-		if (session) {
-			return {};
-		} else {
+		if (!session) {
 			return {
 				status: 302,
 				redirect: '/login'
 			};
+		} else {
+			return { props: { session: session } };
 		}
 	}
 </script>
 
 <script>
-	import { goto } from '$app/navigation';
-	import { session } from '$app/stores';
+	import { browser } from '$app/env';
 
-	if (!$session) {
-		goto('/login');
-	}
+	// import { goto } from '$app/navigation';
+	// import { session } from '$app/stores';
 
-	async function logOut() {
-		$session = null;
-	}
+	export let session;
+
+	// if (browser) {
+	// 	$seshStore = sess;
+	// }
+
+	// console.log('session store', $session, sess);
+
+	// if (!$session) {
+	// 	goto('/login');
+	// }
+
+	// async function logOut() {
+	// 	const response = await fetch('/logout', {
+	// 		method: 'post'
+	// 	});
+
+	// 	console.log(response);
+
+	// 	$session = null;
+	// }
 </script>
 
 <h1>Dashboard</h1>
 
-<form action="/logout" method="GET" on:submit|preventDefault={logOut}>
+<!-- on:submit|preventDefault={logOut} -->
+<form action="/logout" method="get">
 	<button>Log out</button>
 </form>
 

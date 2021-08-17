@@ -6,29 +6,31 @@
 	let visible = false;
 
 	async function signIn(e) {
-		// const response = await fetch('/signin', {
-		// 	method: 'post',
-		// 	body: new FormData(e.target)
-		// });
+		console.log(new FormData(e.target));
 
-		// if (response.ok) {
-		// 	window.location = '/dashboard';
-		// } else {
-		// 	console.error(await response.text());
-		// }
-
-		const { user, session, error } = await supabase.auth.signIn({
-			email,
-			password
+		const response = await fetch('/signin', {
+			method: 'post',
+			body: new FormData(e.target)
 		});
 
-		if (error) {
-			console.error(error);
+		if (response.ok) {
+			window.location = '/dashboard';
+		} else {
+			console.error(await response.text());
 		}
+
+		// const { user, session, error } = await supabase.auth.signIn({
+		// 	email,
+		// 	password
+		// });
+
+		// if (error) {
+		// 	console.error(error);
+		// }
 	}
 
 	function toggle() {
-		document.querySelector('#password').type = visible ? 'text' : 'password';
+		document.querySelector('#password').type = visible ? 'password' : 'text';
 	}
 </script>
 
@@ -41,11 +43,25 @@
 		<h1>Login</h1>
 
 		<form action="" on:submit|preventDefault={signIn}>
-			<TextInput label="Email" bind:value={email} name="email" type="email" />
+			<input
+				class="passwordInput"
+				placeholder="email"
+				type="email"
+				name="email"
+				bind:value={email}
+			/>
+
+			<!-- <TextInput label="Email" bind:value={email} name="mail" type="email" /> -->
 
 			<label for="" />
 			<div class="passwordInput">
-				<input placeholder="Password" bind:value={password} name="password" id="password" />
+				<input
+					placeholder="password"
+					bind:value={password}
+					name="password"
+					id="password"
+					type="password"
+				/>
 
 				<label for="hide" on:click={toggle}>
 					<span class="icon">
@@ -59,12 +75,12 @@
 							viewBox="0 0 24 24"
 						>
 							{#if visible}
-								<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-								<circle cx="12" cy="12" r="3" />
-							{:else}
 								<path
 									d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24M1 1l22 22"
 								/>
+							{:else}
+								<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+								<circle cx="12" cy="12" r="3" />
 							{/if}
 						</svg>
 					</span>
@@ -157,6 +173,8 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+
+		width: 100%;
 
 		padding: 0.625rem 0.75rem;
 

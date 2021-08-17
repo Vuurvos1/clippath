@@ -1,11 +1,7 @@
-import { browser } from '$app/env';
-import { session } from '$app/stores';
 import supabase from '$lib/db';
 
 export async function get() {
 	const { error } = await supabase.auth.signOut();
-
-	console.log('singout');
 
 	if (error) {
 		return {
@@ -14,14 +10,10 @@ export async function get() {
 		};
 	}
 
-	if (browser) {
-		session.set(null);
-	}
-
 	return {
 		status: 302,
 		headers: {
-			location: '/',
+			location: '/auth',
 			'set-cookie': `session=; path=/; expires=0;`
 		}
 	};
