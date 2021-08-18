@@ -34,18 +34,20 @@ create table public.profiles (
 alter table public.profiles enable row level security;
 
 -- posts
-create table public.posts (
-  title text,
-  post text,
-  metadata json,
-  user_id uuid not null
-);
+-- add uuid primairy key
 
-alter table public.posts enable row level security;
+-- create table public.posts (
+--   title text,
+--   post text,
+--   metadata json,
+--   user_id uuid not null
+-- );
 
-create policy "user update own posts"
-  on posts
-  for all using (auth.uid() = user_id);
+-- alter table public.posts enable row level security;
+
+-- create policy "user update own posts"
+--   on posts
+--   for all using (auth.uid() = user_id);
 ```
 
 <!-- auth.uid() = user_id -->

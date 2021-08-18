@@ -1,8 +1,27 @@
 <script context="module">
+	// import supabase from '$lib/db';
+
 	export async function load({ page, fetch, session, context }) {
 		// redirect to login if no session
 		if (session) {
-			return {};
+			let { data, error } = await supabase
+				.from('posts')
+				.select()
+				.limit(1)
+				.eq('title', page.params.slug);
+
+			data = data[0];
+			if (!data) {
+				data = {};
+			}
+
+			return {
+				props: {
+					_session: session,
+					post: data?.post,
+					data: data
+				}
+			};
 		} else {
 			return {
 				status: 302,
@@ -13,66 +32,41 @@
 </script>
 
 <script>
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
 	import supabase from '$lib/db';
-	import { goto } from '$app/navigation';
 
-	if (!$session) {
-		goto('/login');
-	}
+	export let _session;
+	_session = JSON.parse(_session);
 
-	// console.log($session);
-	// if (!$session) {
-	// 	goto('/login');
-	// }
-
-	// export let session;
-	// console.log(session);
+	export let post;
+	export let data;
 
 	let title = $page.params.slug;
-	let post;
-
-	async function getPost() {
-		// convert to try catch
-		// const post = await supabase.from('test').select('room');
-		console.log('post', post, $session);
-	}
-
-	getPost();
 
 	async function savePost(e) {
 		// convert to try catch
+		// check if title already exists to prevent new entry in database / or switch to using ids instead of titles
 
-		// check if title has changed
-		// > update post
-
-		// see if exists
-
-		// if not
-
-		// const user = await supabase.auth.user();
-
-		// console.log('user', user);
-
-		const data = {
-			user_id: $session.user.id,
+		const { data: _data, error } = await supabase.from('posts').upsert({
+			id: data.id,
 			title: title,
 			post: post,
-			metadata: {}
-		};
-
-		const { error } = await supabase.from('posts').upsert(data, {
-			returning: 'minimal' // Don't return the value after inserting
+			metadata: {},
+			user_id: _session.user.id
 		});
 
-		console.log('err', error);
+		if (error) {
+			//  throw error;
+			console.log('err', error);
+		}
 
-		// if (error) throw error;
+		// update to new data
+		data = _data[0];
 	}
 </script>
 
 <h1>edit slug</h1>
-<pre>{JSON.stringify($page, null, 2)}</pre>
+<pre>{JSON.stringify(data, null, 2)}</pre>
 
 <form action="" on:submit|preventDefault={savePost}>
 	<input bind:value={title} name="title" type="text" />
