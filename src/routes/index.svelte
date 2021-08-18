@@ -3,6 +3,8 @@
 </script>
 
 <script>
+	import Badge from '$lib/UI/Badge.svelte';
+	import Icon from '$lib/UI/Icon.svelte';
 </script>
 
 <svelte:head>
@@ -10,9 +12,13 @@
 </svelte:head>
 
 <section>
-	<h1>clippath</h1>
+	<h1>Clippath</h1>
 
 	<p>lorem ipsum</p>
+
+	<Badge>
+		<Icon icon="menu" class="bar" />
+	</Badge>
 </section>
 
 <style lang="scss">

@@ -1,22 +1,25 @@
 <script context="module">
 	export async function load({ page, fetch, session, context }) {
 		// redirect to login if no session
-		if (session) {
-			return {};
-		} else {
+		if (!session) {
 			return {
 				status: 302,
 				redirect: '/login'
 			};
+		} else {
+			return { props: { session: session } };
 		}
 	}
 </script>
 
-<script></script>
+<script>
+	export let session;
+</script>
 
 <h1>Dashboard</h1>
 
-<form action="/logout" method="GET">
+<!-- on:submit|preventDefault={logOut} -->
+<form action="/auth/logout" method="get">
 	<button>Log out</button>
 </form>
 

@@ -1,18 +1,19 @@
+<script context="module">
+	export async function load({ page, fetch, session, context }) {
+		return {
+			props: {
+				session
+			}
+		};
+	}
+</script>
+
 <script>
-	import { browser } from '$app/env';
-	import { session } from '$app/stores';
-	import supabase from '$lib/db';
 	import Header from '$lib/Header/index.svelte';
 	import '../app.css';
 
-	if (browser) {
-		$session = supabase.auth.session();
-
-		supabase.auth.onAuthStateChange((event, sesh) => {
-			console.log(event, session);
-			$session = sesh;
-		});
-	}
+	import { page } from '$app/stores';
+	export let session;
 </script>
 
 <Header />
@@ -21,7 +22,20 @@
 	<slot />
 </main>
 
+<!-- <pre>
+	session = {JSON.stringify(session, null, 2)}
+</pre> -->
+
 <footer />
 
 <style>
+	main {
+		margin-top: 3rem;
+	}
+
+	pre {
+		position: absolute;
+		bottom: 1rem;
+		right: 1rem;
+	}
 </style>

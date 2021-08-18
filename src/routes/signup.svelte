@@ -1,10 +1,8 @@
 <script>
-	import supabase from '$lib/db';
-
 	let password, email;
 
 	async function signUp(e) {
-		const response = await fetch('/register', {
+		const response = await fetch('/auth/signup', {
 			method: 'post',
 			body: new FormData(e.target)
 		});
@@ -14,15 +12,6 @@
 		} else {
 			console.error(await response.text());
 		}
-
-		// const { user, session: sesh, error } = await supabase.auth.signUp({
-		// 	email,
-		// 	password
-		// });
-		// if (error) {
-		// 	console.error(error);
-		// }
-		// console.log(user, sesh, error);
 	}
 </script>
 
