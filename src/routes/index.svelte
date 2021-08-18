@@ -3,6 +3,7 @@
 </script>
 
 <script>
+	import Icon from '$lib/Icon/index.svelte';
 </script>
 
 <svelte:head>
@@ -13,6 +14,8 @@
 	<h1>Clippath</h1>
 
 	<p>lorem ipsum</p>
+
+	<Icon icon="menu" />
 </section>
 
 <style lang="scss">
