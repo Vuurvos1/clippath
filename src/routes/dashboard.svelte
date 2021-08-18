@@ -13,10 +13,14 @@
 </script>
 
 <script>
+	import Sidebar from '$lib/Components/Sidebar.svelte';
+
 	export let session;
 </script>
 
 <h1>Dashboard</h1>
+
+<Sidebar />
 
 <!-- on:submit|preventDefault={logOut} -->
 <form action="/auth/logout" method="get">
