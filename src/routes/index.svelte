@@ -3,7 +3,8 @@
 </script>
 
 <script>
-	import Icon from '$lib/Icon/index.svelte';
+	import Badge from '$lib/UI/Badge.svelte';
+	import Icon from '$lib/UI/Icon.svelte';
 </script>
 
 <svelte:head>
@@ -15,7 +16,9 @@
 
 	<p>lorem ipsum</p>
 
-	<Icon icon="menu" />
+	<Badge>
+		<Icon icon="menu" class="bar" />
+	</Badge>
 </section>
 
 <style lang="scss">

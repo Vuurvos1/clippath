@@ -6,10 +6,10 @@
 		icon = 'x';
 	}
 
-	// console.log(icon);
-	// console.log({ ...$$restProps });
+	let _class = '';
+	export { _class as class };
 </script>
 
-{@html feather.icons[icon].toSvg({ ...$$restProps })}
+{@html feather.icons[icon].toSvg({ class: `icon ${_class}`, ...$$restProps })}
 
 <style></style>
