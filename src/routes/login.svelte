@@ -1,4 +1,5 @@
 <script>
+	import Header from '$lib/Header/Header.svelte';
 	import TextInput from '$lib/UI/TextInput/index.svelte';
 
 	let email, password;
@@ -27,6 +28,8 @@
 <svelte:head>
 	<title>Login</title>
 </svelte:head>
+
+<Header />
 
 <main>
 	<div class="formContainer">

@@ -47,5 +47,10 @@
 	{/await}
 </ul>
 
+<form action="">
+	<input type="text" />
+	<button>Create new post</button>
+</form>
+
 <style lang="scss">
 </style>

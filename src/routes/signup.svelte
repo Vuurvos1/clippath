@@ -1,4 +1,6 @@
 <script>
+	import Header from '$lib/Header/Header.svelte';
+
 	let password, email;
 
 	async function signUp(e) {
@@ -18,6 +20,8 @@
 <svelte:head>
 	<title>Register</title>
 </svelte:head>
+
+<Header />
 
 <h1>Sign up</h1>
 

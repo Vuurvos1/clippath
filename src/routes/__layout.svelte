@@ -9,30 +9,22 @@
 </script>
 
 <script>
-	import Header from '$lib/Header/index.svelte';
 	import '../app.css';
 
 	import { page } from '$app/stores';
 	export let session;
 </script>
 
-<Header />
+<svelte:head>
+	<title>Clippath</title>
+</svelte:head>
 
-<main>
-	<slot />
-</main>
+<slot />
 
 <!-- <pre>
 	session = {JSON.stringify(session, null, 2)}
 </pre> -->
-
-<footer />
-
 <style>
-	main {
-		margin-top: 3rem;
-	}
-
 	pre {
 		position: absolute;
 		bottom: 1rem;
