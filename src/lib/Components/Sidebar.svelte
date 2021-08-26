@@ -1,15 +1,14 @@
 <script>
 	import Icon from '$lib/UI/Icon.svelte';
-	import TextIcon from '$lib/UI/TextIcon.svelte';
+	import SidebarLink from '$lib/UI/SidebarLink.svelte';
 
-	let open = false;
+	let closed = false;
 	function closeSidebar() {
-		console.log(closeSidebar);
-		open = !open;
+		closed = !closed;
 	}
 </script>
 
-<section class="sidebar" class:open>
+<section class="sidebar" class:closed>
 	<div>
 		<div class="sidebar__top">
 			<div class="logoConainter">
@@ -17,44 +16,38 @@
 				<p>ClipPath</p>
 			</div>
 			<span on:click={closeSidebar}>
-				<Icon class="sidebarToggle" icon="chevrons-left" />
+				<Icon class="sidebarToggle" icon="chevron-left" />
 			</span>
 		</div>
 
-		<ul>
-			<li>
-				<a href="/dashboard"><TextIcon icon="home"><span>Dashboard</span></TextIcon></a>
-			</li>
-			<li>
-				<a href="/"><TextIcon icon="folder"><span>Lorem</span></TextIcon></a>
-			</li>
-			<li>
-				<a href="/edit"><TextIcon icon="file"><span>Posts</span></TextIcon></a>
-			</li>
-			<li>
-				<a href="/"><TextIcon icon="users"><span>Team</span></TextIcon></a>
-			</li>
-		</ul>
+		<div class="sidebar__mid">
+			<p>OVERVIEW</p>
+			<ul>
+				<li>
+					<a href="/dashboard"><SidebarLink icon="home"><span>Dashboard</span></SidebarLink></a>
+				</li>
+				<li>
+					<a href="/posts"><SidebarLink icon="file"><span>Posts</span></SidebarLink></a>
+				</li>
+				<li>
+					<a href="/edit"><SidebarLink icon="file"><span>Dashboard</span></SidebarLink></a>
+				</li>
+			</ul>
+		</div>
 	</div>
 
 	<div class="sidebar__bottom">
-		<a href="/settings">Settings</a>
+		<a href="/settings"><SidebarLink icon="settings">Settings</SidebarLink></a>
 
 		<form action="/auth/logout" method="get">
-			<button>Sign out</button>
+			<button><SidebarLink icon="log-out">Settings</SidebarLink></button>
 		</form>
 	</div>
 </section>
 
 <style lang="scss">
-	.logoConainter {
-		display: flex;
-		flex-direction: row;
-
-		margin-bottom: 2rem;
-	}
 	.sidebar {
-		width: 16rem;
+		width: var(--sidebar-open);
 		height: 100vh;
 
 		z-index: 10;
@@ -66,7 +59,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 
-		padding: 1.25rem 1.5rem;
+		padding: 3.25rem 0.875rem 1.5rem 0.875rem;
 
 		background-color: #ffffff;
 
@@ -74,98 +67,141 @@
 
 		transition: all 0.2s ease;
 
+		.logoConainter {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+
+			font-size: 1.5rem;
+			font-weight: 500;
+
+			:global(svg) {
+				width: 2rem;
+				height: 2rem;
+
+				margin-left: 0.5rem;
+				margin-right: 0.75rem;
+			}
+		}
+
 		&__top {
 			display: flex;
 			flex-direction: row;
 
-			padding-left: 0.5rem;
-
 			justify-content: space-between;
 
+			margin-bottom: 3.75rem;
+
 			span {
-				color: rgba(0, 0, 0, 0.6);
+				color: #000;
+				display: flex;
+				align-items: center;
+			}
+		}
+
+		&__mid {
+			p {
+				font-weight: 500;
+				font-size: 0.75rem;
+
+				margin-bottom: 0.5rem;
 			}
 		}
 
 		&__bottom {
-			padding-left: 0.5rem;
-			padding-bottom: 1rem;
-
 			justify-self: flex-end;
-			a,
-			button {
-				font-weight: 600;
-				font-size: 0.85rem;
-				display: inline-block;
-			}
+
 			a {
 				color: #000000;
 				text-decoration: none;
 
-				margin-bottom: 0.25rem;
+				display: block;
+
+				margin-bottom: 1rem;
 			}
 
 			button {
 				outline: none;
 				border: none;
 				background: none;
+
+				display: contents;
 			}
 		}
 
 		ul {
 			display: flex;
 			flex-direction: column;
+
 			list-style: none;
 
 			li {
 				margin-bottom: 1rem;
-				border-radius: 0.25rem;
-
-				a {
-					color: #000000;
-					text-decoration: none;
-					font-weight: 600;
-
-					display: flex;
-					flex-direction: row;
-					align-items: center;
-
-					padding: 0.25rem 0.5rem;
-					span {
-						margin-left: 0.75rem;
-					}
-				}
-
-				&:hover {
-					background-color: rgba(0, 144, 201, 0.35);
-				}
 			}
 
-			a span {
-				transition: opacity 0.05s ease;
+			a {
+				color: #000;
+				text-decoration: none;
 			}
 		}
 
 		:global(.sidebarToggle) {
-			transition: transform 0.15s ease-in;
+			transition: transform 0.15s ease;
 		}
 
-		&.open {
-			width: 8rem;
+		&.closed {
+			span {
+				position: absolute;
+				left: 3.75rem;
+
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+
+				background-color: #e4d7ff;
+				border-radius: 2rem;
+			}
+
+			width: var(--sidebar-closed);
+			padding-bottom: 1.25rem;
+			padding-left: 0.75rem;
+			padding-right: 0.75rem;
 
 			:global(.sidebarToggle) {
-				// transform: rotate(-180deg);
-				transform: scaleX(-1);
+				transform: rotate(-180deg);
+				// transform: scaleX(-1);
 			}
 
-			.logoConainter p {
-				font-size: 0;
+			.logoConainter {
+				position: relative;
+
+				p {
+					font-size: 0;
+				}
 			}
 
-			a span {
-				animation: hideText 0.1s ease;
-				animation-fill-mode: forwards;
+			.sidebar__top {
+				margin-bottom: 4.875rem;
+
+				span {
+					padding: 0.25rem;
+				}
 			}
+
+			li {
+				margin-bottom: 0.5rem;
+			}
+
+			.sidebar__mid {
+				p {
+					font-size: 0;
+				}
+			}
+
+			// a span {
+			// 	animation: hideText 0.1s ease;
+			// 	animation-fill-mode: forwards;
+			// }
 		}
 	}
 

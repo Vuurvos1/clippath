@@ -41,9 +41,9 @@
 </div>
 
 <style lang="scss">
-	:global(.sidebar.open) {
+	:global(.sidebar.closed) {
 		& + .dashboard {
-			padding-left: 8rem;
+			padding-left: var(--sidebar-closed);
 		}
 	}
 
@@ -95,7 +95,7 @@
 
 	.dashboard {
 		position: relative;
-		padding-left: 16rem;
+		padding-left: var(--sidebar-open);
 
 		transition: all 0.2s ease;
 

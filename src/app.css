@@ -5,6 +5,9 @@
 
 	--text: var(--black);
 	--iris: 239, 82%, 65%;
+
+	--sidebar-open: 15.875rem;
+	--sidebar-closed: 4.5rem;
 }
 
 /* Box sizing rules */
