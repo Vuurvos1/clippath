@@ -30,7 +30,7 @@
 					<a href="/posts"><SidebarLink icon="file"><span>Posts</span></SidebarLink></a>
 				</li>
 				<li>
-					<a href="/edit"><SidebarLink icon="file"><span>Dashboard</span></SidebarLink></a>
+					<a href="/edit"><SidebarLink icon="file"><span>Edit</span></SidebarLink></a>
 				</li>
 			</ul>
 		</div>
@@ -40,7 +40,7 @@
 		<a href="/settings"><SidebarLink icon="settings">Settings</SidebarLink></a>
 
 		<form action="/auth/logout" method="get">
-			<button><SidebarLink icon="log-out">Settings</SidebarLink></button>
+			<button><SidebarLink icon="log-out">Log out</SidebarLink></button>
 		</form>
 	</div>
 </section>

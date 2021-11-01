@@ -13,6 +13,7 @@
 </script>
 
 <script>
+	import PostList from '$lib/Components/PostList.svelte';
 	import Sidebar from '$lib/Components/Sidebar.svelte';
 	import Badge from '$lib/UI/Badge.svelte';
 	import Icon from '$lib/UI/Icon.svelte';
@@ -37,6 +38,8 @@
 
 	<main>
 		<section class="content">main content</section>
+
+		<PostList />
 	</main>
 </div>
 

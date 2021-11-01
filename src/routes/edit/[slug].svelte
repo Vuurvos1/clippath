@@ -3,12 +3,14 @@
 
 	export async function load({ page, fetch, session, context }) {
 		// redirect to login if no session
+
 		if (session) {
 			let { data, error } = await supabase
 				.from('posts')
 				.select()
 				.limit(1)
-				.eq('title', page.params.slug);
+				.eq('user_id', JSON.parse(session).user.id)
+				.eq('id', page.params.slug);
 
 			data = data[0];
 			if (!data) {
@@ -18,7 +20,6 @@
 			return {
 				props: {
 					_session: session,
-					post: data?.post,
 					data: data
 				}
 			};
@@ -35,11 +36,14 @@
 	import { page } from '$app/stores';
 	import supabase from '$lib/db';
 
-	export let _session;
-	_session = JSON.parse(_session);
+	import { goto } from '$app/navigation';
 
-	export let post;
+	export let _session;
+
+	// export let post;
 	export let data;
+
+	let content = data.content;
 
 	let title = $page.params.slug;
 
@@ -49,9 +53,9 @@
 
 		const { data: _data, error } = await supabase.from('posts').upsert({
 			id: data.id,
-			title: title,
-			post: post,
-			metadata: {},
+			title,
+			content,
+			// metadata: {},
 			user_id: _session.user.id
 		});
 
@@ -63,6 +67,18 @@
 		// update to new data
 		data = _data[0];
 	}
+
+	async function deletePost(e) {
+		const { data: _data, error } = await supabase.from('posts').delete().match({ id: data.id });
+
+		console.log('deleted post');
+
+		if (error) {
+			console.log(error);
+		} else {
+			goto('/dashboard');
+		}
+	}
 </script>
 
 <h1>edit slug</h1>
@@ -71,10 +87,12 @@
 <form action="" on:submit|preventDefault={savePost}>
 	<input bind:value={title} name="title" type="text" />
 
-	<textarea bind:value={post} name="post" id="" />
+	<textarea bind:value={content} name="post" id="" />
 
 	<button>save</button>
 </form>
+
+<button on:click={deletePost}>delete</button>
 
 <style lang="scss">
 	form {

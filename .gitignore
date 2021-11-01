@@ -3,5 +3,7 @@ node_modules
 /.svelte-kit
 /package
 
+package-lock.josn
+
 .env
 .vercel_build_output
